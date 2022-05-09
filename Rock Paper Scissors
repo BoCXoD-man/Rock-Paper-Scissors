@@ -1,0 +1,61 @@
+# (R - камень, S - ножницы, P - бумага)
+# Импортируем чуть ли не самый важный модуль для любой игры: модуль генерации псевдослучайных чисел
+import random
+# Создаем функцию самого розыгрыша каждого раунда. На ввод пойдет число, что загадал компьютер.
+def raund(secret, win, lose):
+# Сперва переберем ситуации, кто кого побеждает. Ну и для разнообразия приплюсовываем победы и поражения за сессию.
+    # Локальные переменные для внесения разнообразия.
+    win_, lose_ = 0, 0
+    while True:
+        ent = input('Enter "R - Stone" or "S - Scissors or "P - Paper"  ').upper()
+        # Условия поражения:
+        if secret == 'R' and ent == 'S':
+            print(f'You lost! My stone will win your scissors')
+            lose_ += 1
+            break
+        elif secret == 'P' and ent == 'R':
+            print(f'You lost! My paper will win your stone')
+            lose_ += 1
+            break
+        elif secret == 'S' and ent == 'P':
+            print(f'You lost! My scissors will win your paper')
+            lose_ += 1
+            break
+        # И результаты победы:
+        elif secret == 'S' and ent == 'R':
+            print(f'You win! Your stone will win my scissors')
+            win_ += 1
+            break
+        elif secret == 'R' and ent == 'P':
+            print(f'You win! Your paper will win my stone')
+            win_ += 1
+            break
+        elif secret == 'P' and ent == 'S':
+            print(f'You win! Your scissors will win my paper')
+            win_ += 1
+            break
+        # И ничья вернет нас на новый виток внутреннего цикла, пока не будет выявлен победитель.
+        else:
+            print("Draw, let's try again(or foolproof activated)")
+            secret = random.choice(list)
+    win += win_
+    lose += lose_
+    return win, lose
+
+# Добавдяем глобальных переменных       
+win, lose = 0, 0
+list = ['R', 'S' ,'P']
+secret = ''
+# Начинаем основную игру. Основной цикл
+while True:
+    # Генерируем выбор копбютера
+    secret = random.choice(list)
+    win, lose = raund(secret, win, lose)
+    print(win, lose)
+    # Хотим ли мы продолжить?
+    ent = input(f'Would you like to play more? Yes(Y) or No!').lower()
+    if ent == 'yes' or ent == 'y':
+        continue
+    else:
+        break
+print(f'You win - {win}, you lose - {lose}')
