@@ -7,7 +7,7 @@ def raund(secret, win, lose):
     # Локальные переменные для внесения разнообразия.
     win_, lose_ = 0, 0
     while True:
-        ent = input('Enter "R - Stone" or "S - Scissors or "P - Paper"  ').upper()
+        ent = input('Enter "R - Stone" or "S - Scissors" or "P - Paper"  ').upper()
         # Условия поражения:
         if secret == 'R' and ent == 'S':
             print(f'You lost! My stone will win your scissors')
